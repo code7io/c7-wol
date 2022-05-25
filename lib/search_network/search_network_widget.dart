@@ -56,8 +56,7 @@ class _SearchNetworkWidgetState extends State<SearchNetworkWidget> {
         }
       },
     );
-
-    isSearching = false;
+    setState(() => isSearching = false);
     print('Done');
   }
 
