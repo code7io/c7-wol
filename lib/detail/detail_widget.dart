@@ -1,3 +1,6 @@
+import 'package:c7_wake_on_lan/model/model_pc.dart';
+import 'package:wake_on_lan/wake_on_lan.dart';
+
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -5,10 +8,11 @@ import '../flutter_flow/flutter_flow_widgets.dart';
 import '../home_page/home_page_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class DetailWidget extends StatefulWidget {
-  const DetailWidget({Key key}) : super(key: key);
+  const DetailWidget({Key key, this.pc}) : super(key: key);
+
+  final PcModel pc;
 
   @override
   _DetailWidgetState createState() => _DetailWidgetState();
@@ -39,7 +43,7 @@ class _DetailWidgetState extends State<DetailWidget> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'XX',
+                      widget.pc.name,
                       textAlign: TextAlign.center,
                       style: FlutterFlowTheme.of(context).title1,
                     ),
@@ -51,17 +55,38 @@ class _DetailWidgetState extends State<DetailWidget> {
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Container(
-                        width: 150,
-                        height: 150,
-                        decoration: BoxDecoration(
-                          color: FlutterFlowTheme.of(context).primaryColor,
-                          shape: BoxShape.circle,
-                        ),
-                        child: Icon(
-                          Icons.power_settings_new,
-                          color: Colors.white,
-                          size: 100,
+                      InkWell(
+                        onTap: () async {
+                          MACAddress macAddress = MACAddress(widget.pc.mac);
+                          IPv4Address ipv4Address = IPv4Address(widget.pc.ip);
+                          WakeOnLAN wol = WakeOnLAN(ipv4Address, macAddress);
+                          await wol.wake();
+
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                'Starting PC',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
+                              duration: Duration(milliseconds: 4000),
+                              backgroundColor: FlutterFlowTheme.of(context).primaryColor,
+                            ),
+                          );
+                        },
+                        child: Container(
+                          width: 150,
+                          height: 150,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context).primaryColor,
+                            shape: BoxShape.circle,
+                          ),
+                          child: Icon(
+                            Icons.power_settings_new,
+                            color: Colors.white,
+                            size: 100,
+                          ),
                         ),
                       ),
                     ],
@@ -78,7 +103,7 @@ class _DetailWidgetState extends State<DetailWidget> {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content: Text(
-                                'Shuttding PC down',
+                                'Shutting PC down',
                                 style: TextStyle(
                                   color: Colors.white,
                                 ),
@@ -189,9 +214,7 @@ class _DetailWidgetState extends State<DetailWidget> {
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
                                   child: Text(
-                                    FFLocalizations.of(context).getText(
-                                      'nxjvwl1h' /* XX */,
-                                    ),
+                                    widget.pc.name,
                                     style: FlutterFlowTheme.of(context).subtitle1,
                                   ),
                                 ),
@@ -233,9 +256,7 @@ class _DetailWidgetState extends State<DetailWidget> {
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
                                   child: Text(
-                                    FFLocalizations.of(context).getText(
-                                      'to4a3rps' /* XX */,
-                                    ),
+                                    widget.pc.mac,
                                     style: FlutterFlowTheme.of(context).subtitle1,
                                   ),
                                 ),
@@ -277,9 +298,7 @@ class _DetailWidgetState extends State<DetailWidget> {
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
                                   child: Text(
-                                    FFLocalizations.of(context).getText(
-                                      'xpd1801w' /* XX */,
-                                    ),
+                                    widget.pc.ip,
                                     style: FlutterFlowTheme.of(context).subtitle1,
                                   ),
                                 ),
@@ -321,9 +340,7 @@ class _DetailWidgetState extends State<DetailWidget> {
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
                                   child: Text(
-                                    FFLocalizations.of(context).getText(
-                                      'mxwn5hs1' /* XX */,
-                                    ),
+                                    widget.pc.port,
                                     style: FlutterFlowTheme.of(context).subtitle1,
                                   ),
                                 ),

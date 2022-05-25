@@ -1,3 +1,8 @@
+import 'dart:convert';
+
+import 'package:c7_wake_on_lan/model/model_pc.dart';
+import 'package:wake_on_lan/wake_on_lan.dart';
+
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -15,22 +20,22 @@ class AddPcWidget extends StatefulWidget {
 }
 
 class _AddPcWidgetState extends State<AddPcWidget> {
-  TextEditingController textController1;
-  TextEditingController textController2;
-  TextEditingController textController3;
-  TextEditingController textController4;
+  TextEditingController textControllerName;
+  TextEditingController textControllerMac;
+  TextEditingController textControllerIp;
+  TextEditingController textControllerPort;
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    textController1 = TextEditingController();
-    textController2 = TextEditingController();
-    textController3 = TextEditingController();
-    textController4 = TextEditingController();
+    textControllerName = TextEditingController();
+    textControllerMac = TextEditingController();
+    textControllerIp = TextEditingController();
+    textControllerPort = TextEditingController();
 
-    textController3.text = widget.ip;
+    textControllerIp.text = widget.ip;
   }
 
   @override
@@ -59,7 +64,7 @@ class _AddPcWidgetState extends State<AddPcWidget> {
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       TextFormField(
-                        controller: textController1,
+                        controller: textControllerName,
                         onChanged: (_) => EasyDebounce.debounce(
                           'textController1',
                           Duration(milliseconds: 2000),
@@ -110,7 +115,7 @@ class _AddPcWidgetState extends State<AddPcWidget> {
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(0, 5, 0, 0),
                         child: TextFormField(
-                          controller: textController2,
+                          controller: textControllerMac,
                           onChanged: (_) => EasyDebounce.debounce(
                             'textController2',
                             Duration(milliseconds: 2000),
@@ -144,12 +149,25 @@ class _AddPcWidgetState extends State<AddPcWidget> {
                             ),
                           ),
                           style: FlutterFlowTheme.of(context).bodyText1,
+                          validator: (val) {
+                            if (val == null || val.isEmpty) {
+                              return FFLocalizations.of(context).getText(
+                                'wxw0kag1' /* Field is required */,
+                              );
+                            }
+
+                            if (!MACAddress.validate(val)) {
+                              return 'Invalid Mac Address';
+                            }
+
+                            return null;
+                          },
                         ),
                       ),
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(0, 5, 0, 0),
                         child: TextFormField(
-                          controller: textController3,
+                          controller: textControllerIp,
                           onChanged: (_) => EasyDebounce.debounce(
                             'textController3',
                             Duration(milliseconds: 2000),
@@ -183,12 +201,26 @@ class _AddPcWidgetState extends State<AddPcWidget> {
                             ),
                           ),
                           style: FlutterFlowTheme.of(context).bodyText1,
+                          keyboardType: TextInputType.number,
+                          validator: (val) {
+                            if (val == null || val.isEmpty) {
+                              return FFLocalizations.of(context).getText(
+                                'wxw0kag1' /* Field is required */,
+                              );
+                            }
+
+                            if (!IPv4Address.validate(val)) {
+                              return 'Invalid IP Address';
+                            }
+
+                            return null;
+                          },
                         ),
                       ),
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(0, 5, 0, 0),
                         child: TextFormField(
-                          controller: textController4,
+                          controller: textControllerPort,
                           onChanged: (_) => EasyDebounce.debounce(
                             'textController4',
                             Duration(milliseconds: 2000),
@@ -222,6 +254,7 @@ class _AddPcWidgetState extends State<AddPcWidget> {
                             ),
                           ),
                           style: FlutterFlowTheme.of(context).bodyText1,
+                          keyboardType: TextInputType.number,
                           validator: (val) {
                             if (val == null || val.isEmpty) {
                               return FFLocalizations.of(context).getText(
@@ -240,6 +273,32 @@ class _AddPcWidgetState extends State<AddPcWidget> {
                   onPressed: () async {
                     if (formKey.currentState == null || !formKey.currentState.validate()) {
                       return;
+                    }
+
+                    //save pc to storage
+
+                    String entries = FFAppState().pcEntries;
+                    List<dynamic> list = [];
+                    if (entries != null) {
+                      list = jsonDecode(entries);
+                    }
+
+                    var pc = {
+                      'name': textControllerName.text,
+                      'mac': textControllerMac.text,
+                      'ip': textControllerIp.text,
+                      'port': textControllerPort.text,
+                    };
+
+                    list.add(pc);
+
+                    String entriesNew = jsonEncode(list);
+                    FFAppState().pcEntries = entriesNew;
+                    FFAppState().hasEntry = true;
+
+                    for (var i = 0; i < list.length; i++) {
+                      PcModel pc = PcModel.fromJson(list[i]);
+                      FFAppState().pcList.add(pc);
                     }
 
                     await Navigator.push(

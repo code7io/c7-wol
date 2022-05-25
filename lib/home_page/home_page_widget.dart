@@ -1,3 +1,4 @@
+import 'package:c7_wake_on_lan/detail/detail_widget.dart';
 import 'package:c7_wake_on_lan/search_network/search_network_widget.dart';
 
 import '../flutter_flow/flutter_flow_icon_button.dart';
@@ -116,6 +117,14 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   ),
                   tileColor: FlutterFlowTheme.of(context).primaryBackground,
                   dense: false,
+                  onTap: () async {
+                    await Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) {
+                        return DetailWidget(pc: pcsItem);
+                      }),
+                    );
+                  },
                 );
               },
             );

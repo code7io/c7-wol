@@ -1,6 +1,7 @@
+import 'dart:io';
+
 import 'package:blinking_text/blinking_text.dart';
 import 'package:c7_wake_on_lan/add_pc/add_pc_widget.dart';
-import 'package:lan_scanner/lan_scanner.dart';
 import 'package:network_info_plus/network_info_plus.dart';
 
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -27,28 +28,37 @@ class _SearchNetworkWidgetState extends State<SearchNetworkWidget> {
   void initState() {
     super.initState();
 
-    networkAnalyzing();
+    scanNetwork();
   }
 
-  void networkAnalyzing() async {
-    final scanner = LanScanner();
-    var wifiIP = await NetworkInfo().getWifiIP();
+  Future<void> scanNetwork() async {
+    await (NetworkInfo().getWifiIP()).then(
+      (ip) async {
+        final String subnet = ip.substring(0, ip.lastIndexOf('.'));
+        const port = 9;
+        for (var i = 0; i < 256; i++) {
+          setState(() => percentInt = (0.0039 * i));
+          setState(() => percentTxt = (0.39 * i).toInt().toString() + '%');
 
-    subnet = ipToCSubnet(wifiIP);
+          String ip = '$subnet.$i';
+          await Socket.connect(ip, port, timeout: Duration(milliseconds: 50)).then((socket) async {
+            await InternetAddress(socket.address.address).reverse().then((value) {
+              print(value.host);
+              print(socket.address.address);
 
-    final stream = scanner.icmpScan(subnet, progressCallback: (progress) {
-      setState(() => percentInt = progress);
-      setState(() => percentTxt = (progress * 100).toInt().toString() + '%');
+              foundIps.add(value.host);
+            }).catchError((error) {
+              print(socket.address.address);
+              print('Error: $error');
+            });
+            socket.destroy();
+          }).catchError((error) => null);
+        }
+      },
+    );
 
-      if (progress == 1) {
-        isSearching = false;
-      }
-    });
-
-    stream.listen((HostModel device) {
-      print("Found host: ${device.ip}");
-      foundIps.add(device.ip);
-    });
+    isSearching = false;
+    print('Done');
   }
 
   @override
@@ -133,12 +143,9 @@ class _SearchNetworkWidgetState extends State<SearchNetworkWidget> {
                             onTap: () async {
                               await Navigator.push(
                                 context,
-                                PageTransition(
-                                  type: PageTransitionType.bottomToTop,
-                                  duration: const Duration(milliseconds: 250),
-                                  reverseDuration: const Duration(milliseconds: 250),
-                                  child: AddPcWidget(ip: host),
-                                ),
+                                MaterialPageRoute(builder: (context) {
+                                  return AddPcWidget(ip: host);
+                                }),
                               );
                             },
                             title: Text(host),
