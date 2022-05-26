@@ -35,7 +35,7 @@ class _AddPcWidgetState extends State<AddPcWidget> {
     textControllerIp = TextEditingController();
     textControllerPort = TextEditingController();
 
-    if (widget.ip != 'No Device found. Manually enter info') {
+    if (widget.ip != FFLocalizations.of(context).getText('weifbuew')) {
       textControllerIp.text = widget.ip;
     }
   }
@@ -161,7 +161,9 @@ class _AddPcWidgetState extends State<AddPcWidget> {
                             textControllerMac.text = textControllerMac.text.replaceAll('-', ':');
 
                             if (!MACAddress.validate(val)) {
-                              return 'Invalid Mac Address';
+                              return FFLocalizations.of(context).getText(
+                                'pqownfdw' /* MAC invalid */,
+                              );
                             }
 
                             return null;
@@ -214,7 +216,9 @@ class _AddPcWidgetState extends State<AddPcWidget> {
                             }
 
                             if (!IPv4Address.validate(val)) {
-                              return 'Invalid IP Address';
+                              return FFLocalizations.of(context).getText(
+                                'cn09qewf' /* IP invalid */,
+                              );
                             }
 
                             return null;

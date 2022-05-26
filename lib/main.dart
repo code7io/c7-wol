@@ -1,3 +1,4 @@
+import 'package:dart_ping_ios/dart_ping_ios.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'flutter_flow/flutter_flow_theme.dart';
@@ -9,6 +10,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await FlutterFlowTheme.initialize();
+  DartPingIOS.register();
 
   FFAppState(); // Initialize FFAppState
 

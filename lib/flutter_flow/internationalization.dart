@@ -109,6 +109,18 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Home',
       'de': 'Home',
     },
+    'ywclyvhz': {
+      'en': 'Status',
+      'de': 'Status',
+    },
+    'onqfweaponi': {
+      'en': 'Offline',
+      'de': 'Aus',
+    },
+    'qpnifeppolwdd': {
+      'en': 'Online',
+      'de': 'An',
+    },
   },
   // AddPc
   {
@@ -160,6 +172,14 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Home',
       'de': 'Home',
     },
+    'cn09qewf': {
+      'en': 'IP Address invalid',
+      'de': 'IP Adresse ungültig',
+    },
+    'pqownfdw': {
+      'en': 'MAC Address invalid',
+      'de': 'MAC Adresse ungültig',
+    },
   },
   // SearchNetwork
   {
@@ -170,6 +190,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     '3135dyww': {
       'en': 'Found Devices',
       'de': 'Gefundene Geräte',
+    },
+    'weifbuew': {
+      'en': 'No Device found. Manually enter info',
+      'de': 'Kein Gerät gefunden. Manuell hinzufügen',
     },
   },
 ].reduce((a, b) => a..addAll(b));

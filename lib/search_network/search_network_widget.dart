@@ -35,13 +35,13 @@ class _SearchNetworkWidgetState extends State<SearchNetworkWidget> {
     await (NetworkInfo().getWifiIP()).then(
       (ip) async {
         final String subnet = ip.substring(0, ip.lastIndexOf('.'));
-        const port = 9;
+        const port = 22;
         for (var i = 0; i < 256; i++) {
           setState(() => percentInt = (0.0039 * i));
           setState(() => percentTxt = (0.39 * i).toInt().toString() + '%');
 
           String ip = '$subnet.$i';
-          await Socket.connect(ip, port, timeout: Duration(milliseconds: 50)).then((socket) async {
+          await Socket.connect(ip, port, timeout: Duration(milliseconds: 200)).then((socket) async {
             await InternetAddress(socket.address.address).reverse().then((value) {
               print(value.host);
               print(socket.address.address);
@@ -58,7 +58,7 @@ class _SearchNetworkWidgetState extends State<SearchNetworkWidget> {
     );
 
     if (foundIps.length == 0) {
-      foundIps.add('No Device found. Manually enter info');
+      foundIps.add('weifbuew');
     }
 
     setState(() => isSearching = false);
@@ -140,7 +140,13 @@ class _SearchNetworkWidgetState extends State<SearchNetworkWidget> {
                       physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
-                        final host = foundIps[index];
+                        var host = foundIps[index];
+
+                        if (host == 'weifbuew') {
+                          host = FFLocalizations.of(context).getText(
+                            'weifbuew' /* MAC invalid */,
+                          );
+                        }
 
                         return Card(
                           child: ListTile(

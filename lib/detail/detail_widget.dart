@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:c7_wake_on_lan/custom/WakeOnLanCustom.dart';
 import 'package:c7_wake_on_lan/model/model_pc.dart';
+import 'package:dart_ping/dart_ping.dart';
 import 'package:wake_on_lan/wake_on_lan.dart';
 
 import '../flutter_flow/flutter_flow_icon_button.dart';
@@ -21,10 +24,20 @@ class DetailWidget extends StatefulWidget {
 
 class _DetailWidgetState extends State<DetailWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  String status = '';
 
   @override
   void initState() {
     super.initState();
+    statusTxt(context);
+  }
+
+  Future<void> statusTxt(context) async {
+    Ping ping = Ping('google.com', count: 5);
+    ping.stream.listen((event) {
+      print(event);
+    });
+    setState(() => FFLocalizations.of(context).getText('onqfweaponi')); // on: qpnifeppolwdd
   }
 
   @override
@@ -107,6 +120,24 @@ class _DetailWidgetState extends State<DetailWidget> {
                             size: 100,
                           ),
                         ),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(8, 10, 8, 0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        FFLocalizations.of(context).getText(
+                              'ywclyvhz' /* Status */,
+                            ) +
+                            ': ' +
+                            status,
+                        textAlign: TextAlign.center,
+                        style: FlutterFlowTheme.of(context).subtitle1,
                       ),
                     ],
                   ),
