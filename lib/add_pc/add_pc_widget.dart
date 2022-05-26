@@ -35,7 +35,9 @@ class _AddPcWidgetState extends State<AddPcWidget> {
     textControllerIp = TextEditingController();
     textControllerPort = TextEditingController();
 
-    textControllerIp.text = widget.ip;
+    if (widget.ip != 'No Device found. Manually enter info') {
+      textControllerIp.text = widget.ip;
+    }
   }
 
   @override

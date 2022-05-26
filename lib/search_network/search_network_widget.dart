@@ -56,6 +56,11 @@ class _SearchNetworkWidgetState extends State<SearchNetworkWidget> {
         }
       },
     );
+
+    if (foundIps.length == 0) {
+      foundIps.add('No Device found. Manually enter info');
+    }
+
     setState(() => isSearching = false);
     print('Done');
   }
