@@ -27,6 +27,38 @@ class _DetailWidgetState extends State<DetailWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
+      appBar: AppBar(
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        automaticallyImplyLeading: false,
+        leading: FlutterFlowIconButton(
+          borderColor: Colors.transparent,
+          borderRadius: 30,
+          borderWidth: 1,
+          buttonSize: 60,
+          icon: Icon(
+            Icons.arrow_back_ios,
+            color: FlutterFlowTheme.of(context).primaryColor,
+            size: 30,
+          ),
+          onPressed: () async {
+            logFirebaseEvent('IconButton_ON_TAP');
+            Navigator.pop(context);
+          },
+        ),
+        title: Text(
+          FFLocalizations.of(context).getText(
+            'axmllutm' /* Page Title */,
+          ),
+          style: FlutterFlowTheme.of(context).title2.override(
+                fontFamily: 'Poppins',
+                color: FlutterFlowTheme.of(context).primaryText,
+                fontSize: 22,
+              ),
+        ),
+        actions: [],
+        centerTitle: true,
+        elevation: 0,
+      ),
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       body: SafeArea(
         child: GestureDetector(
@@ -35,17 +67,6 @@ class _DetailWidgetState extends State<DetailWidget> {
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      FFAppState().pcs.length.toString(),
-                      textAlign: TextAlign.center,
-                      style: FlutterFlowTheme.of(context).title1,
-                    ),
-                  ],
-                ),
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0, 50, 0, 0),
                   child: Row(
@@ -64,6 +85,22 @@ class _DetailWidgetState extends State<DetailWidget> {
                           color: Colors.white,
                           size: 100,
                         ),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(8, 10, 8, 0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        FFLocalizations.of(context).getText(
+                          'fvrdh5sx' /* Status */,
+                        ),
+                        textAlign: TextAlign.center,
+                        style: FlutterFlowTheme.of(context).subtitle1,
                       ),
                     ],
                   ),
@@ -111,6 +148,7 @@ class _DetailWidgetState extends State<DetailWidget> {
                                 FFLocalizations.of(context).getText(
                                   'bied3soc' /* Shutdown */,
                                 ),
+                                textAlign: TextAlign.center,
                                 style: FlutterFlowTheme.of(context)
                                     .subtitle1
                                     .override(
@@ -170,6 +208,54 @@ class _DetailWidgetState extends State<DetailWidget> {
                           ),
                         ),
                       ),
+                      InkWell(
+                        onTap: () async {
+                          logFirebaseEvent('Container_ON_TAP');
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                'Restarting PC',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
+                              duration: Duration(milliseconds: 4000),
+                              backgroundColor:
+                                  FlutterFlowTheme.of(context).primaryColor,
+                            ),
+                          );
+                        },
+                        child: Container(
+                          width: 100,
+                          height: 100,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context).secondaryColor,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.nightlight_round,
+                                color: Colors.white,
+                                size: 45,
+                              ),
+                              Text(
+                                FFLocalizations.of(context).getText(
+                                  'avu7ysio' /* Sleep */,
+                                ),
+                                style: FlutterFlowTheme.of(context)
+                                    .subtitle1
+                                    .override(
+                                      fontFamily: 'Poppins',
+                                      color: Colors.white,
+                                    ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -217,7 +303,7 @@ class _DetailWidgetState extends State<DetailWidget> {
                             buttonSize: 60,
                             icon: Icon(
                               Icons.edit,
-                              color: Colors.black,
+                              color: FlutterFlowTheme.of(context).primaryText,
                               size: 24,
                             ),
                             onPressed: () {
@@ -264,7 +350,7 @@ class _DetailWidgetState extends State<DetailWidget> {
                             buttonSize: 60,
                             icon: Icon(
                               Icons.edit,
-                              color: Colors.black,
+                              color: FlutterFlowTheme.of(context).primaryText,
                               size: 24,
                             ),
                             onPressed: () {
@@ -311,7 +397,7 @@ class _DetailWidgetState extends State<DetailWidget> {
                             buttonSize: 60,
                             icon: Icon(
                               Icons.edit,
-                              color: Colors.black,
+                              color: FlutterFlowTheme.of(context).primaryText,
                               size: 24,
                             ),
                             onPressed: () {
@@ -358,7 +444,7 @@ class _DetailWidgetState extends State<DetailWidget> {
                             buttonSize: 60,
                             icon: Icon(
                               Icons.edit,
-                              color: Colors.black,
+                              color: FlutterFlowTheme.of(context).primaryText,
                               size: 24,
                             ),
                             onPressed: () {
@@ -368,7 +454,7 @@ class _DetailWidgetState extends State<DetailWidget> {
                         ],
                       ),
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 25),
                         child: FFButtonWidget(
                           onPressed: () async {
                             logFirebaseEvent('Button_ON_TAP');

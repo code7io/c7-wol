@@ -44,7 +44,7 @@ class FFLocalizationsDelegate extends LocalizationsDelegate<FFLocalizations> {
 final kTranslationsMap = <Map<String, Map<String, String>>>[
   // HomePage
   {
-    'mpdc0m1f': {
+    '921jgr5m': {
       'en': 'C7 Wake on Lan',
       'de': '',
     },
@@ -56,7 +56,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'IP or MAC',
       'de': 'IP oder MAC',
     },
-    'dxt0pvdz': {
+    'ciyh3ttz': {
       'en':
           'No PC added yet. Press the button in the upper right to add your first PC',
       'de': '',
@@ -68,12 +68,20 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // Detail
   {
+    'fvrdh5sx': {
+      'en': 'Status',
+      'de': '',
+    },
     'bied3soc': {
       'en': 'Shutdown',
       'de': 'Herunterfahren',
     },
     '7a9edt5f': {
       'en': 'Restart',
+      'de': 'Neustarten',
+    },
+    'avu7ysio': {
+      'en': 'Sleep',
       'de': 'Neustarten',
     },
     '7pqir15j': {
@@ -112,6 +120,10 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Delete',
       'de': 'Löschen',
     },
+    'axmllutm': {
+      'en': 'Page Title',
+      'de': '',
+    },
     'dm30m5ug': {
       'en': 'Home',
       'de': 'Home',
@@ -119,10 +131,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // AddPc
   {
-    '9urjz9rj': {
-      'en': 'Add a PC',
-      'de': 'Fügen Sie einen PC hinzu',
-    },
     'ep5gbmfs': {
       'en': 'PC Name',
       'de': 'PC Name',
@@ -163,9 +171,67 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Add',
       'de': 'Hinzufügen',
     },
+    '4m8axf2t': {
+      'en': 'Add PC',
+      'de': '',
+    },
     'wi80cq94': {
       'en': 'Home',
       'de': 'Home',
+    },
+  },
+  // SearchNetwork
+  {
+    'qohaeial': {
+      'en': '50%',
+      'de': '',
+    },
+    'vqvkq9uk': {
+      'en': 'Searching Network',
+      'de': '',
+    },
+    'kli45vce': {
+      'en': 'Found Devices',
+      'de': '',
+    },
+    'o4ks304v': {
+      'en': 'Page Title',
+      'de': '',
+    },
+    'rnakgibe': {
+      'en': 'Home',
+      'de': '',
+    },
+  },
+  // Settings
+  {
+    'fhfrw5gi': {
+      'en': 'Settings',
+      'de': '',
+    },
+    'zo9xzsyr': {
+      'en': 'Ping duration during network scan',
+      'de': '',
+    },
+    'rvnt54uz': {
+      'en': 'App Version',
+      'de': '',
+    },
+    '1vl2bkst': {
+      'en': '1.0.0',
+      'de': '',
+    },
+    'eio8o7k9': {
+      'en': 'Made in Mannheim with ❤️',
+      'de': '',
+    },
+    'w16998fz': {
+      'en': 'By code7.io',
+      'de': '',
+    },
+    'hw9g19er': {
+      'en': 'Home',
+      'de': '',
     },
   },
 ].reduce((a, b) => a..addAll(b));

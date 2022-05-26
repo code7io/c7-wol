@@ -39,7 +39,9 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'C7 Wake on Lan',
+                      FFLocalizations.of(context).getText(
+                        '921jgr5m' /* C7 Wake on Lan */,
+                      ),
                       textAlign: TextAlign.center,
                       style: FlutterFlowTheme.of(context).title1.override(
                             fontFamily: 'Poppins',
@@ -124,7 +126,9 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(8, 10, 8, 0),
                   child: Text(
-                    'No PC added yet. Press the button in the upper right to add your first PC',
+                    FFLocalizations.of(context).getText(
+                      'ciyh3ttz' /* No PC added yet. Press the but... */,
+                    ),
                     style: FlutterFlowTheme.of(context).subtitle1,
                   ),
                 ),

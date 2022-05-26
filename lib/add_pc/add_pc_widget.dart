@@ -1,3 +1,4 @@
+import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -35,21 +36,50 @@ class _AddPcWidgetState extends State<AddPcWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
+      appBar: AppBar(
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        automaticallyImplyLeading: false,
+        leading: FlutterFlowIconButton(
+          borderColor: Colors.transparent,
+          borderRadius: 30,
+          borderWidth: 1,
+          buttonSize: 60,
+          icon: Icon(
+            Icons.close,
+            color: FlutterFlowTheme.of(context).primaryColor,
+            size: 30,
+          ),
+          onPressed: () async {
+            logFirebaseEvent('IconButton_ON_TAP');
+            await Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => HomePageWidget(),
+              ),
+            );
+          },
+        ),
+        title: Text(
+          'Add PC',
+          style: FlutterFlowTheme.of(context).title2.override(
+                fontFamily: 'Poppins',
+                color: FlutterFlowTheme.of(context).primaryText,
+                fontSize: 22,
+              ),
+        ),
+        actions: [],
+        centerTitle: true,
+        elevation: 0,
+      ),
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
           child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(8, 0, 8, 0),
+            padding: EdgeInsetsDirectional.fromSTEB(12, 0, 12, 0),
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
-                Text(
-                  FFLocalizations.of(context).getText(
-                    '9urjz9rj' /* Add a PC */,
-                  ),
-                  style: FlutterFlowTheme.of(context).title1,
-                ),
                 Form(
                   key: formKey,
                   autovalidateMode: AutovalidateMode.always,
