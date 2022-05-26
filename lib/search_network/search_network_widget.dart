@@ -157,6 +157,7 @@ class _SearchNetworkWidgetState extends State<SearchNetworkWidget> {
                               );
                             },
                             title: Text(host[0]),
+                            subtitle: Text(host[1]),
                           ),
                         );
                       },
