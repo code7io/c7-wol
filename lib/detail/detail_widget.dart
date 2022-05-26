@@ -182,20 +182,33 @@ class _DetailWidgetState extends State<DetailWidget> {
                           MACAddress macAddress = MACAddress(widget.pc.mac);
                           IPv4Address ipv4Address = IPv4Address(widget.pc.ip);
                           WakeOnLAN wol = WakeOnLAN(ipv4Address, macAddress, port: int.parse(widget.pc.port));
-                          await wol.wake();
-
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                'Starting PC',
-                                style: TextStyle(
-                                  color: Colors.white,
+                          await wol.wake().then((res) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  'Starting PC',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
                                 ),
+                                duration: Duration(milliseconds: 2000),
+                                backgroundColor: FlutterFlowTheme.of(context).primaryColor,
                               ),
-                              duration: Duration(milliseconds: 4000),
-                              backgroundColor: FlutterFlowTheme.of(context).primaryColor,
-                            ),
-                          );
+                            );
+                          }, onError: (err) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  'Error while starting PC',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                duration: Duration(milliseconds: 2000),
+                                backgroundColor: FlutterFlowTheme.of(context).alternate,
+                              ),
+                            );
+                          });
                         },
                         child: Container(
                           width: 150,
@@ -248,7 +261,7 @@ class _DetailWidgetState extends State<DetailWidget> {
                                   color: Colors.white,
                                 ),
                               ),
-                              duration: Duration(milliseconds: 4000),
+                              duration: Duration(milliseconds: 2000),
                               backgroundColor: FlutterFlowTheme.of(context).primaryColor,
                             ),
                           );
@@ -293,7 +306,7 @@ class _DetailWidgetState extends State<DetailWidget> {
                                   color: Colors.white,
                                 ),
                               ),
-                              duration: Duration(milliseconds: 4000),
+                              duration: Duration(milliseconds: 2000),
                               backgroundColor: FlutterFlowTheme.of(context).primaryColor,
                             ),
                           );
@@ -337,7 +350,7 @@ class _DetailWidgetState extends State<DetailWidget> {
                                   color: Colors.white,
                                 ),
                               ),
-                              duration: Duration(milliseconds: 4000),
+                              duration: Duration(milliseconds: 2000),
                               backgroundColor: FlutterFlowTheme.of(context).primaryColor,
                             ),
                           );
