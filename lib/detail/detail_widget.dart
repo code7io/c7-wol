@@ -33,11 +33,15 @@ class _DetailWidgetState extends State<DetailWidget> {
   }
 
   Future<void> statusTxt(context) async {
-    Ping ping = Ping('google.com', count: 5);
+    bool okay = false;
+    Ping ping = Ping(widget.pc.ip, count: 5);
     ping.stream.listen((event) {
-      print(event);
+      if (event.summary.received == event.summary.transmitted) {
+        setState(() => status = FFLocalizations.of(context).getText('qpnifeppolwdd'));
+      } else {
+        setState(() => status = FFLocalizations.of(context).getText('onqfweaponi'));
+      }
     });
-    setState(() => FFLocalizations.of(context).getText('onqfweaponi')); // on: qpnifeppolwdd
   }
 
   @override
