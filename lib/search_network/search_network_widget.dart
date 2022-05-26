@@ -97,6 +97,7 @@ class _SearchNetworkWidgetState extends State<SearchNetworkWidget> {
                               percentTxt,
                               style: FlutterFlowTheme.of(context).bodyText1.override(
                                     fontFamily: 'Poppins',
+                                    fontSize: 26,
                                     color: FlutterFlowTheme.of(context).primaryColor,
                                   ),
                             ),
