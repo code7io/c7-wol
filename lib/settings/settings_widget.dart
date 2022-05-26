@@ -78,20 +78,16 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                       ),
                       style: FlutterFlowTheme.of(context).bodyText1,
                     ),
-                    Container(
-                      width: double.infinity,
-                      child: Slider(
-                        activeColor: FlutterFlowTheme.of(context).primaryColor,
-                        inactiveColor: Color(0xFF9E9E9E),
-                        min: 100,
-                        max: 5000,
-                        value: sliderValue ??= 100,
-                        label: sliderValue.toString(),
-                        divisions: 49,
-                        onChanged: (newValue) {
-                          setState(() => sliderValue = newValue);
-                        },
-                      ),
+                    Slider(
+                      activeColor: FlutterFlowTheme.of(context).primaryColor,
+                      inactiveColor: Color(0xFF9E9E9E),
+                      min: 100,
+                      max: 5000,
+                      value: sliderValue ??= 100,
+                      divisions: 49,
+                      onChanged: (newValue) {
+                        setState(() => sliderValue = newValue);
+                      },
                     ),
                   ],
                 ),

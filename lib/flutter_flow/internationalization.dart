@@ -171,7 +171,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Add',
       'de': 'Hinzufügen',
     },
-    '3nwwuj77': {
+    'yr7dhjax': {
       'en': 'Add PC',
       'de': '',
     },
@@ -194,7 +194,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Found Devices',
       'de': '',
     },
-    'p30zhz0a': {
+    '8e9i1d99': {
       'en': 'Page Title',
       'de': '',
     },
@@ -205,31 +205,42 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // Settings
   {
-    'mot80xq6': {
+    'vorauecp': {
       'en': 'Settings',
       'de': '',
     },
-    '3n5yh8wb': {
+    '9anr0ypk': {
       'en': 'Ping duration during network scan',
       'de': '',
     },
-    'dq6ulkwf': {
+    'qemfvlvl': {
       'en': 'App Version',
       'de': '',
     },
-    '6letzj15': {
+    'kynha3rb': {
       'en': '1.0.0',
       'de': '',
     },
-    'jhpr6z46': {
+    '3kizxdks': {
       'en': 'Made in Mannheim with ❤️',
       'de': '',
     },
-    '054vurrp': {
+    'vjiqet2f': {
       'en': 'By code7.io',
       'de': '',
     },
-    'aglsbuv0': {
+    '8zm14s5g': {
+      'en': 'Home',
+      'de': '',
+    },
+  },
+  // test
+  {
+    '8ym27ag3': {
+      'en': 'Page Title',
+      'de': '',
+    },
+    'lh7o2rly': {
       'en': 'Home',
       'de': '',
     },
