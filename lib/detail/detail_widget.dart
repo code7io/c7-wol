@@ -68,13 +68,6 @@ class _DetailWidgetState extends State<DetailWidget> {
 
     String entriesNew = jsonEncode(newList);
     FFAppState().pcEntries = entriesNew;
-
-    for (var i = 0; i < newList.length; i++) {
-      PcModel pc = PcModel.fromJson(newList[i]);
-      FFAppState().pcList.add(pc);
-    }
-
-    FFAppState().initializePersistedState();
   }
 
   void updateIp(val) {
@@ -93,13 +86,6 @@ class _DetailWidgetState extends State<DetailWidget> {
 
     String entriesNew = jsonEncode(newList);
     FFAppState().pcEntries = entriesNew;
-
-    for (var i = 0; i < newList.length; i++) {
-      PcModel pc = PcModel.fromJson(newList[i]);
-      FFAppState().pcList.add(pc);
-    }
-
-    FFAppState().initializePersistedState();
   }
 
   void updatePort(val) {
@@ -118,13 +104,6 @@ class _DetailWidgetState extends State<DetailWidget> {
 
     String entriesNew = jsonEncode(newList);
     FFAppState().pcEntries = entriesNew;
-
-    for (var i = 0; i < newList.length; i++) {
-      PcModel pc = PcModel.fromJson(newList[i]);
-      FFAppState().pcList.add(pc);
-    }
-
-    FFAppState().initializePersistedState();
   }
 
   void deletePc() {
@@ -144,13 +123,6 @@ class _DetailWidgetState extends State<DetailWidget> {
 
     String entriesNew = jsonEncode(newList);
     FFAppState().pcEntries = entriesNew;
-
-    for (var i = 0; i < newList.length; i++) {
-      PcModel pc = PcModel.fromJson(newList[i]);
-      FFAppState().pcList.add(pc);
-    }
-
-    FFAppState().initializePersistedState();
   }
 
   @override
@@ -171,7 +143,12 @@ class _DetailWidgetState extends State<DetailWidget> {
             size: 30,
           ),
           onPressed: () async {
-            Navigator.pop(context);
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => HomePageWidget(),
+              ),
+            );
           },
         ),
         title: Text(

@@ -1,6 +1,4 @@
 import 'dart:convert';
-
-import 'package:c7_wake_on_lan/model/model_pc.dart';
 import 'package:wake_on_lan/wake_on_lan.dart';
 
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -316,11 +314,6 @@ class _AddPcWidgetState extends State<AddPcWidget> {
                     String entriesNew = jsonEncode(list);
                     FFAppState().pcEntries = entriesNew;
                     FFAppState().hasEntry = true;
-
-                    for (var i = 0; i < list.length; i++) {
-                      PcModel pc = PcModel.fromJson(list[i]);
-                      FFAppState().pcList.add(pc);
-                    }
 
                     await Navigator.push(
                       context,

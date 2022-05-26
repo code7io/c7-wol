@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:c7_wake_on_lan/detail/detail_widget.dart';
+import 'package:c7_wake_on_lan/model/model_pc.dart';
 import 'package:c7_wake_on_lan/search_network/search_network_widget.dart';
 
 import '../flutter_flow/flutter_flow_icon_button.dart';
@@ -15,10 +18,23 @@ class HomePageWidget extends StatefulWidget {
 
 class _HomePageWidgetState extends State<HomePageWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  List<PcModel> pcList = [];
 
   @override
   void initState() {
     super.initState();
+
+    setState(() {
+      String entries = FFAppState().pcEntries;
+      if (entries != null && entries.isNotEmpty) {
+        List<dynamic> pcArr = jsonDecode(entries);
+
+        for (var i = 0; i < pcArr.length; i++) {
+          PcModel pc = PcModel.fromJson(pcArr[i]);
+          pcList.add(pc);
+        }
+      }
+    });
   }
 
   @override
@@ -90,13 +106,13 @@ class _HomePageWidgetState extends State<HomePageWidget> {
       return Expanded(
         child: Builder(
           builder: (context) {
-            final pcs = FFAppState().pcList ?? [];
             return ListView.builder(
               padding: EdgeInsets.zero,
               scrollDirection: Axis.vertical,
-              itemCount: pcs.length,
-              itemBuilder: (context, pcsIndex) {
-                final pcsItem = pcs[pcsIndex];
+              itemCount: pcList.length,
+              itemBuilder: (context, i) {
+                final pcsItem = pcList[i];
+
                 return ListTile(
                   leading: Icon(
                     Icons.computer,
