@@ -158,6 +158,8 @@ class _AddPcWidgetState extends State<AddPcWidget> {
                               );
                             }
 
+                            textControllerMac.text = textControllerMac.text.replaceAll('-', ':');
+
                             if (!MACAddress.validate(val)) {
                               return 'Invalid Mac Address';
                             }

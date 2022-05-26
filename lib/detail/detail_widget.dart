@@ -1,3 +1,4 @@
+import 'package:c7_wake_on_lan/custom/WakeOnLanCustom.dart';
 import 'package:c7_wake_on_lan/model/model_pc.dart';
 import 'package:wake_on_lan/wake_on_lan.dart';
 
@@ -59,7 +60,7 @@ class _DetailWidgetState extends State<DetailWidget> {
                         onTap: () async {
                           MACAddress macAddress = MACAddress(widget.pc.mac);
                           IPv4Address ipv4Address = IPv4Address(widget.pc.ip);
-                          WakeOnLAN wol = WakeOnLAN(ipv4Address, macAddress);
+                          WakeOnLANCustom wol = WakeOnLANCustom(ipv4Address, macAddress, int.parse(widget.pc.port));
                           await wol.wake();
 
                           ScaffoldMessenger.of(context).showSnackBar(
@@ -100,6 +101,11 @@ class _DetailWidgetState extends State<DetailWidget> {
                     children: [
                       InkWell(
                         onTap: () async {
+                          MACAddress macAddress = MACAddress(widget.pc.mac.split('').reversed.join(''));
+                          IPv4Address ipv4Address = IPv4Address(widget.pc.ip);
+                          WakeOnLANCustom wol = WakeOnLANCustom(ipv4Address, macAddress, int.parse(widget.pc.port));
+                          await wol.wake();
+
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content: Text(
@@ -144,6 +150,11 @@ class _DetailWidgetState extends State<DetailWidget> {
                       ),
                       InkWell(
                         onTap: () async {
+                          MACAddress macAddress = MACAddress(widget.pc.mac);
+                          IPv4Address ipv4Address = IPv4Address(widget.pc.ip);
+                          WakeOnLANCustom wol = WakeOnLANCustom(ipv4Address, macAddress, int.parse(widget.pc.port));
+                          await wol.wake();
+
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content: Text(
@@ -228,7 +239,7 @@ class _DetailWidgetState extends State<DetailWidget> {
                             buttonSize: 60,
                             icon: Icon(
                               Icons.edit,
-                              color: Colors.black,
+                              color: FlutterFlowTheme.of(context).primaryText,
                               size: 24,
                             ),
                             onPressed: () {
@@ -270,7 +281,7 @@ class _DetailWidgetState extends State<DetailWidget> {
                             buttonSize: 60,
                             icon: Icon(
                               Icons.edit,
-                              color: Colors.black,
+                              color: FlutterFlowTheme.of(context).primaryText,
                               size: 24,
                             ),
                             onPressed: () {
@@ -312,7 +323,7 @@ class _DetailWidgetState extends State<DetailWidget> {
                             buttonSize: 60,
                             icon: Icon(
                               Icons.edit,
-                              color: Colors.black,
+                              color: FlutterFlowTheme.of(context).primaryText,
                               size: 24,
                             ),
                             onPressed: () {
@@ -354,7 +365,7 @@ class _DetailWidgetState extends State<DetailWidget> {
                             buttonSize: 60,
                             icon: Icon(
                               Icons.edit,
-                              color: Colors.black,
+                              color: FlutterFlowTheme.of(context).primaryText,
                               size: 24,
                             ),
                             onPressed: () {
