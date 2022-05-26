@@ -11,9 +11,9 @@ import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 
 class AddPcWidget extends StatefulWidget {
-  const AddPcWidget({Key key, this.ip}) : super(key: key);
+  const AddPcWidget({Key key, this.data}) : super(key: key);
 
-  final String ip;
+  final List<String> data;
 
   @override
   _AddPcWidgetState createState() => _AddPcWidgetState();
@@ -38,8 +38,9 @@ class _AddPcWidgetState extends State<AddPcWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.ip != FFLocalizations.of(context).getText('weifbuew')) {
-      textControllerIp.text = widget.ip;
+    if (widget.data[0] != FFLocalizations.of(context).getText('weifbuew')) {
+      textControllerIp.text = widget.data[0];
+      textControllerName.text = widget.data[1];
     }
 
     return Scaffold(

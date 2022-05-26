@@ -26,7 +26,7 @@ class DetailWidget extends StatefulWidget {
 
 class _DetailWidgetState extends State<DetailWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  String status = '';
+  String status = '...';
   String name;
   String ip;
   String port;
@@ -42,7 +42,6 @@ class _DetailWidgetState extends State<DetailWidget> {
   }
 
   Future<void> statusTxt(context) async {
-    bool okay = false;
     Ping ping = Ping(widget.pc.ip, count: 5);
     ping.stream.listen((event) {
       if (event.summary.received == event.summary.transmitted) {
@@ -53,8 +52,8 @@ class _DetailWidgetState extends State<DetailWidget> {
     });
   }
 
-  void updateName(name) {
-    setState(() => name = name);
+  void updateName(val) {
+    setState(() => name = val);
 
     String entries = FFAppState().pcEntries;
     List<dynamic> list = jsonDecode(entries);
@@ -62,9 +61,8 @@ class _DetailWidgetState extends State<DetailWidget> {
 
     for (var i = 0; i < list.length; i++) {
       if (list[i]['mac'] == widget.pc.mac) {
-        list[i]['name'] = name;
+        list[i]['name'] = val;
       }
-
       newList.add(list[i]);
     }
 
@@ -75,10 +73,12 @@ class _DetailWidgetState extends State<DetailWidget> {
       PcModel pc = PcModel.fromJson(newList[i]);
       FFAppState().pcList.add(pc);
     }
+
+    FFAppState().initializePersistedState();
   }
 
-  void updateIp(ip) {
-    setState(() => ip = ip);
+  void updateIp(val) {
+    setState(() => ip = val);
 
     String entries = FFAppState().pcEntries;
     List<dynamic> list = jsonDecode(entries);
@@ -86,9 +86,8 @@ class _DetailWidgetState extends State<DetailWidget> {
 
     for (var i = 0; i < list.length; i++) {
       if (list[i]['mac'] == widget.pc.mac) {
-        list[i]['ip'] = ip;
+        list[i]['ip'] = val;
       }
-
       newList.add(list[i]);
     }
 
@@ -99,10 +98,12 @@ class _DetailWidgetState extends State<DetailWidget> {
       PcModel pc = PcModel.fromJson(newList[i]);
       FFAppState().pcList.add(pc);
     }
+
+    FFAppState().initializePersistedState();
   }
 
-  void updatePort(port) {
-    setState(() => port = port);
+  void updatePort(val) {
+    setState(() => port = val);
 
     String entries = FFAppState().pcEntries;
     List<dynamic> list = jsonDecode(entries);
@@ -110,9 +111,8 @@ class _DetailWidgetState extends State<DetailWidget> {
 
     for (var i = 0; i < list.length; i++) {
       if (list[i]['mac'] == widget.pc.mac) {
-        list[i]['port'] = port;
+        list[i]['port'] = val;
       }
-
       newList.add(list[i]);
     }
 
@@ -123,6 +123,8 @@ class _DetailWidgetState extends State<DetailWidget> {
       PcModel pc = PcModel.fromJson(newList[i]);
       FFAppState().pcList.add(pc);
     }
+
+    FFAppState().initializePersistedState();
   }
 
   void deletePc() {
@@ -147,6 +149,8 @@ class _DetailWidgetState extends State<DetailWidget> {
       PcModel pc = PcModel.fromJson(newList[i]);
       FFAppState().pcList.add(pc);
     }
+
+    FFAppState().initializePersistedState();
   }
 
   @override
@@ -411,6 +415,34 @@ class _DetailWidgetState extends State<DetailWidget> {
                               children: [
                                 Text(
                                   FFLocalizations.of(context).getText(
+                                    'd2ke4olt' /* MAC Adress: */,
+                                  ),
+                                  style: FlutterFlowTheme.of(context).subtitle1,
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
+                                  child: Text(
+                                    widget.pc.mac,
+                                    style: FlutterFlowTheme.of(context).subtitle1,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Text(
+                                  FFLocalizations.of(context).getText(
                                     '7pqir15j' /* PC Name: */,
                                   ),
                                   style: FlutterFlowTheme.of(context).subtitle1,
@@ -448,36 +480,8 @@ class _DetailWidgetState extends State<DetailWidget> {
                                 ),
                               );
 
-                              updateName(text);
+                              updateName(text[0]);
                             },
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Text(
-                                  FFLocalizations.of(context).getText(
-                                    'd2ke4olt' /* MAC Adress: */,
-                                  ),
-                                  style: FlutterFlowTheme.of(context).subtitle1,
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
-                                  child: Text(
-                                    widget.pc.mac,
-                                    style: FlutterFlowTheme.of(context).subtitle1,
-                                  ),
-                                ),
-                              ],
-                            ),
                           ),
                         ],
                       ),
@@ -530,7 +534,7 @@ class _DetailWidgetState extends State<DetailWidget> {
                                 ),
                               );
 
-                              updateIp(text);
+                              updateIp(text[0]);
                             },
                           ),
                         ],
@@ -584,7 +588,7 @@ class _DetailWidgetState extends State<DetailWidget> {
                                 ),
                               );
 
-                              updatePort(text);
+                              updatePort(text[0]);
                             },
                           ),
                         ],

@@ -20,7 +20,7 @@ class _SearchNetworkWidgetState extends State<SearchNetworkWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   String percentTxt = '0%';
   double percentInt = 0.0;
-  List<String> foundIps = [];
+  List<List<String>> foundIps = [];
   var subnet;
   bool isSearching = true;
 
@@ -43,10 +43,7 @@ class _SearchNetworkWidgetState extends State<SearchNetworkWidget> {
           String ip = '$subnet.$i';
           await Socket.connect(ip, port, timeout: Duration(milliseconds: 500)).then((socket) async {
             await InternetAddress(socket.address.address).reverse().then((value) {
-              print(value.host);
-              print(socket.address.address);
-
-              foundIps.add(value.host);
+              foundIps.add([value.host, value.address]);
             }).catchError((error) {
               print(socket.address.address);
               print('Error: $error');
@@ -58,7 +55,7 @@ class _SearchNetworkWidgetState extends State<SearchNetworkWidget> {
     );
 
     if (foundIps.length == 0) {
-      foundIps.add('weifbuew');
+      foundIps.add(['weifbuew']);
     }
 
     setState(() => isSearching = false);
@@ -91,7 +88,7 @@ class _SearchNetworkWidgetState extends State<SearchNetworkWidget> {
                         children: [
                           CircularPercentIndicator(
                             percent: percentInt,
-                            radius: 60,
+                            radius: 90,
                             lineWidth: 24,
                             animation: false,
                             progressColor: FlutterFlowTheme.of(context).primaryColor,
@@ -142,9 +139,9 @@ class _SearchNetworkWidgetState extends State<SearchNetworkWidget> {
                       itemBuilder: (context, index) {
                         var host = foundIps[index];
 
-                        if (host == 'weifbuew') {
-                          host = FFLocalizations.of(context).getText(
-                            'weifbuew' /* MAC invalid */,
+                        if (host[0] == 'weifbuew') {
+                          host[0] = FFLocalizations.of(context).getText(
+                            'weifbuew' /* no result */,
                           );
                         }
 
@@ -154,11 +151,11 @@ class _SearchNetworkWidgetState extends State<SearchNetworkWidget> {
                               await Navigator.push(
                                 context,
                                 MaterialPageRoute(builder: (context) {
-                                  return AddPcWidget(ip: host);
+                                  return AddPcWidget(data: host);
                                 }),
                               );
                             },
-                            title: Text(host),
+                            title: Text(host[0]),
                           ),
                         );
                       },
