@@ -181,7 +181,7 @@ class _DetailWidgetState extends State<DetailWidget> {
                         onTap: () async {
                           MACAddress macAddress = MACAddress(widget.pc.mac);
                           IPv4Address ipv4Address = IPv4Address(widget.pc.ip);
-                          WakeOnLANCustom wol = WakeOnLANCustom(ipv4Address, macAddress, int.parse(widget.pc.port));
+                          WakeOnLAN wol = WakeOnLAN(ipv4Address, macAddress, port: int.parse(widget.pc.port));
                           await wol.wake();
 
                           ScaffoldMessenger.of(context).showSnackBar(
