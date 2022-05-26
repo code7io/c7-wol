@@ -2,6 +2,14 @@ c7_wake_on_lan
 2.7
 file:///C:/Users/DNO/Desktop/c7-wol/
 file:///C:/Users/DNO/Desktop/c7-wol/lib/
+adaptive_dialog
+2.15
+file:///D:/SDK/flutter/.pub-cache/hosted/pub.dartlang.org/adaptive_dialog-1.6.3/
+file:///D:/SDK/flutter/.pub-cache/hosted/pub.dartlang.org/adaptive_dialog-1.6.3/lib/
+animations
+2.12
+file:///D:/SDK/flutter/.pub-cache/hosted/pub.dartlang.org/animations-2.0.2/
+file:///D:/SDK/flutter/.pub-cache/hosted/pub.dartlang.org/animations-2.0.2/lib/
 args
 2.12
 file:///D:/SDK/flutter/.pub-cache/hosted/pub.dartlang.org/args-2.3.1/
@@ -118,6 +126,10 @@ http_parser
 2.12
 file:///D:/SDK/flutter/.pub-cache/hosted/pub.dartlang.org/http_parser-4.0.1/
 file:///D:/SDK/flutter/.pub-cache/hosted/pub.dartlang.org/http_parser-4.0.1/lib/
+intersperse
+2.12
+file:///D:/SDK/flutter/.pub-cache/hosted/pub.dartlang.org/intersperse-2.0.0/
+file:///D:/SDK/flutter/.pub-cache/hosted/pub.dartlang.org/intersperse-2.0.0/lib/
 intl
 2.12
 file:///D:/SDK/flutter/.pub-cache/hosted/pub.dartlang.org/intl-0.17.0/
@@ -134,6 +146,10 @@ logger
 2.12
 file:///D:/SDK/flutter/.pub-cache/hosted/pub.dartlang.org/logger-1.1.0/
 file:///D:/SDK/flutter/.pub-cache/hosted/pub.dartlang.org/logger-1.1.0/lib/
+macos_ui
+2.15
+file:///D:/SDK/flutter/.pub-cache/hosted/pub.dartlang.org/macos_ui-1.3.0/
+file:///D:/SDK/flutter/.pub-cache/hosted/pub.dartlang.org/macos_ui-1.3.0/lib/
 matcher
 2.12
 file:///D:/SDK/flutter/.pub-cache/hosted/pub.dartlang.org/matcher-0.12.11/

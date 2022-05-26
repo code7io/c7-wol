@@ -1,5 +1,7 @@
+import 'dart:convert';
 import 'dart:developer';
 
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:c7_wake_on_lan/custom/WakeOnLanCustom.dart';
 import 'package:c7_wake_on_lan/model/model_pc.dart';
 import 'package:dart_ping/dart_ping.dart';
@@ -25,11 +27,18 @@ class DetailWidget extends StatefulWidget {
 class _DetailWidgetState extends State<DetailWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   String status = '';
+  String name;
+  String ip;
+  String port;
 
   @override
   void initState() {
     super.initState();
     statusTxt(context);
+
+    setState(() => name = widget.pc.name);
+    setState(() => ip = widget.pc.ip);
+    setState(() => port = widget.pc.port);
   }
 
   Future<void> statusTxt(context) async {
@@ -42,6 +51,102 @@ class _DetailWidgetState extends State<DetailWidget> {
         setState(() => status = FFLocalizations.of(context).getText('onqfweaponi'));
       }
     });
+  }
+
+  void updateName(name) {
+    setState(() => name = name);
+
+    String entries = FFAppState().pcEntries;
+    List<dynamic> list = jsonDecode(entries);
+    List<dynamic> newList = [];
+
+    for (var i = 0; i < list.length; i++) {
+      if (list[i]['mac'] == widget.pc.mac) {
+        list[i]['name'] = name;
+      }
+
+      newList.add(list[i]);
+    }
+
+    String entriesNew = jsonEncode(newList);
+    FFAppState().pcEntries = entriesNew;
+
+    for (var i = 0; i < newList.length; i++) {
+      PcModel pc = PcModel.fromJson(newList[i]);
+      FFAppState().pcList.add(pc);
+    }
+  }
+
+  void updateIp(ip) {
+    setState(() => ip = ip);
+
+    String entries = FFAppState().pcEntries;
+    List<dynamic> list = jsonDecode(entries);
+    List<dynamic> newList = [];
+
+    for (var i = 0; i < list.length; i++) {
+      if (list[i]['mac'] == widget.pc.mac) {
+        list[i]['ip'] = ip;
+      }
+
+      newList.add(list[i]);
+    }
+
+    String entriesNew = jsonEncode(newList);
+    FFAppState().pcEntries = entriesNew;
+
+    for (var i = 0; i < newList.length; i++) {
+      PcModel pc = PcModel.fromJson(newList[i]);
+      FFAppState().pcList.add(pc);
+    }
+  }
+
+  void updatePort(port) {
+    setState(() => port = port);
+
+    String entries = FFAppState().pcEntries;
+    List<dynamic> list = jsonDecode(entries);
+    List<dynamic> newList = [];
+
+    for (var i = 0; i < list.length; i++) {
+      if (list[i]['mac'] == widget.pc.mac) {
+        list[i]['port'] = port;
+      }
+
+      newList.add(list[i]);
+    }
+
+    String entriesNew = jsonEncode(newList);
+    FFAppState().pcEntries = entriesNew;
+
+    for (var i = 0; i < newList.length; i++) {
+      PcModel pc = PcModel.fromJson(newList[i]);
+      FFAppState().pcList.add(pc);
+    }
+  }
+
+  void deletePc() {
+    String entries = FFAppState().pcEntries;
+    List<dynamic> list = jsonDecode(entries);
+    List<dynamic> newList = [];
+
+    for (var i = 0; i < list.length; i++) {
+      if (list[i]['mac'] != widget.pc.mac) {
+        newList.add(list[i]);
+      }
+    }
+
+    if (newList.length < 1) {
+      FFAppState().hasEntry = false;
+    }
+
+    String entriesNew = jsonEncode(newList);
+    FFAppState().pcEntries = entriesNew;
+
+    for (var i = 0; i < newList.length; i++) {
+      PcModel pc = PcModel.fromJson(newList[i]);
+      FFAppState().pcList.add(pc);
+    }
   }
 
   @override
@@ -66,7 +171,7 @@ class _DetailWidgetState extends State<DetailWidget> {
           },
         ),
         title: Text(
-          widget.pc.name,
+          name,
           style: FlutterFlowTheme.of(context).title2.override(
                 fontFamily: 'Poppins',
                 color: FlutterFlowTheme.of(context).primaryText,
@@ -154,15 +259,10 @@ class _DetailWidgetState extends State<DetailWidget> {
                     children: [
                       InkWell(
                         onTap: () async {
-                          MACAddress macAddress = MACAddress(widget.pc.mac.split('').reversed.join(''));
-                          IPv4Address ipv4Address = IPv4Address(widget.pc.ip);
-                          WakeOnLANCustom wol = WakeOnLANCustom(ipv4Address, macAddress, int.parse(widget.pc.port));
-                          await wol.wake();
-
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content: Text(
-                                'Shutting PC down',
+                                'Coming soon',
                                 style: TextStyle(
                                   color: Colors.white,
                                 ),
@@ -192,6 +292,7 @@ class _DetailWidgetState extends State<DetailWidget> {
                                 FFLocalizations.of(context).getText(
                                   'bied3soc' /* Shutdown */,
                                 ),
+                                textAlign: TextAlign.center,
                                 style: FlutterFlowTheme.of(context).subtitle1.override(
                                       fontFamily: 'Poppins',
                                       color: Colors.white,
@@ -203,15 +304,10 @@ class _DetailWidgetState extends State<DetailWidget> {
                       ),
                       InkWell(
                         onTap: () async {
-                          MACAddress macAddress = MACAddress(widget.pc.mac);
-                          IPv4Address ipv4Address = IPv4Address(widget.pc.ip);
-                          WakeOnLANCustom wol = WakeOnLANCustom(ipv4Address, macAddress, int.parse(widget.pc.port));
-                          await wol.wake();
-
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content: Text(
-                                'Restarting PC',
+                                'Coming soon',
                                 style: TextStyle(
                                   color: Colors.white,
                                 ),
@@ -250,6 +346,50 @@ class _DetailWidgetState extends State<DetailWidget> {
                           ),
                         ),
                       ),
+                      InkWell(
+                        onTap: () async {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                'Coming soon',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
+                              duration: Duration(milliseconds: 4000),
+                              backgroundColor: FlutterFlowTheme.of(context).primaryColor,
+                            ),
+                          );
+                        },
+                        child: Container(
+                          width: 100,
+                          height: 100,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context).secondaryColor,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.nightlight_round,
+                                color: Colors.white,
+                                size: 45,
+                              ),
+                              Text(
+                                FFLocalizations.of(context).getText(
+                                  'avu7ysio' /* Sleep */,
+                                ),
+                                style: FlutterFlowTheme.of(context).subtitle1.override(
+                                      fontFamily: 'Poppins',
+                                      color: Colors.white,
+                                    ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -278,7 +418,7 @@ class _DetailWidgetState extends State<DetailWidget> {
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
                                   child: Text(
-                                    widget.pc.name,
+                                    name,
                                     style: FlutterFlowTheme.of(context).subtitle1,
                                   ),
                                 ),
@@ -295,8 +435,20 @@ class _DetailWidgetState extends State<DetailWidget> {
                               color: FlutterFlowTheme.of(context).primaryText,
                               size: 24,
                             ),
-                            onPressed: () {
-                              print('IconButton pressed ...');
+                            onPressed: () async {
+                              final text = await showTextInputDialog(
+                                context: context,
+                                textFields: const [
+                                  DialogTextField(
+                                    hintText: '',
+                                  ),
+                                ],
+                                title: FFLocalizations.of(context).getText(
+                                  '7pqir15j' /* PC Name: */,
+                                ),
+                              );
+
+                              updateName(text);
                             },
                           ),
                         ],
@@ -327,20 +479,6 @@ class _DetailWidgetState extends State<DetailWidget> {
                               ],
                             ),
                           ),
-                          FlutterFlowIconButton(
-                            borderColor: Colors.transparent,
-                            borderRadius: 30,
-                            borderWidth: 1,
-                            buttonSize: 60,
-                            icon: Icon(
-                              Icons.edit,
-                              color: FlutterFlowTheme.of(context).primaryText,
-                              size: 24,
-                            ),
-                            onPressed: () {
-                              print('IconButton pressed ...');
-                            },
-                          ),
                         ],
                       ),
                       Row(
@@ -355,14 +493,14 @@ class _DetailWidgetState extends State<DetailWidget> {
                               children: [
                                 Text(
                                   FFLocalizations.of(context).getText(
-                                    'g2lrrb9y' /* IP Adress: */,
+                                    'g2lrrb9y' /* IP Address: */,
                                   ),
                                   style: FlutterFlowTheme.of(context).subtitle1,
                                 ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
                                   child: Text(
-                                    widget.pc.ip,
+                                    ip,
                                     style: FlutterFlowTheme.of(context).subtitle1,
                                   ),
                                 ),
@@ -379,8 +517,20 @@ class _DetailWidgetState extends State<DetailWidget> {
                               color: FlutterFlowTheme.of(context).primaryText,
                               size: 24,
                             ),
-                            onPressed: () {
-                              print('IconButton pressed ...');
+                            onPressed: () async {
+                              final text = await showTextInputDialog(
+                                context: context,
+                                textFields: const [
+                                  DialogTextField(
+                                    hintText: '',
+                                  ),
+                                ],
+                                title: FFLocalizations.of(context).getText(
+                                  'g2lrrb9y' /* IP Address: */,
+                                ),
+                              );
+
+                              updateIp(text);
                             },
                           ),
                         ],
@@ -404,7 +554,7 @@ class _DetailWidgetState extends State<DetailWidget> {
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
                                   child: Text(
-                                    widget.pc.port,
+                                    port,
                                     style: FlutterFlowTheme.of(context).subtitle1,
                                   ),
                                 ),
@@ -421,8 +571,20 @@ class _DetailWidgetState extends State<DetailWidget> {
                               color: FlutterFlowTheme.of(context).primaryText,
                               size: 24,
                             ),
-                            onPressed: () {
-                              print('IconButton pressed ...');
+                            onPressed: () async {
+                              final text = await showTextInputDialog(
+                                context: context,
+                                textFields: const [
+                                  DialogTextField(
+                                    hintText: '',
+                                  ),
+                                ],
+                                title: FFLocalizations.of(context).getText(
+                                  'ml43v9az' /* Port */,
+                                ),
+                              );
+
+                              updatePort(text);
                             },
                           ),
                         ],
@@ -431,32 +593,31 @@ class _DetailWidgetState extends State<DetailWidget> {
                         padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 25),
                         child: FFButtonWidget(
                           onPressed: () async {
-                            var confirmDialogResponse = await showDialog<bool>(
-                                  context: context,
-                                  builder: (alertDialogContext) {
-                                    return AlertDialog(
-                                      title: Text('Really Delete?'),
-                                      content: Text('Do you want to really delete this PC?'),
-                                      actions: [
-                                        TextButton(
-                                          onPressed: () => Navigator.pop(alertDialogContext, false),
-                                          child: Text('Cancel'),
-                                        ),
-                                        TextButton(
-                                          onPressed: () => Navigator.pop(alertDialogContext, true),
-                                          child: Text('DELETE'),
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                ) ??
-                                false;
-                            await Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => HomePageWidget(),
-                              ),
+                            final confirmDialogResponse = await showModalActionSheet<String>(
+                              context: context,
+                              title: FFLocalizations.of(context).getText('afsadgfshghe'),
+                              message: FFLocalizations.of(context).getText('owuehbnfiwbbubebbbsedf'),
+                              cancelLabel: FFLocalizations.of(context).getText('uonfaasffsa'),
+                              actions: [
+                                SheetAction(
+                                  icon: Icons.warning,
+                                  label: FFLocalizations.of(context).getText('go5528js'),
+                                  key: 'destructiveKey',
+                                  isDestructiveAction: true,
+                                ),
+                              ],
                             );
+
+                            if (confirmDialogResponse == 'destructiveKey') {
+                              deletePc();
+
+                              await Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => HomePageWidget(),
+                                ),
+                              );
+                            }
                           },
                           text: FFLocalizations.of(context).getText(
                             'go5528js' /* Delete */,

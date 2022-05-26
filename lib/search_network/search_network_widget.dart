@@ -41,7 +41,7 @@ class _SearchNetworkWidgetState extends State<SearchNetworkWidget> {
           setState(() => percentTxt = (0.39 * i).toInt().toString() + '%');
 
           String ip = '$subnet.$i';
-          await Socket.connect(ip, port, timeout: Duration(milliseconds: 200)).then((socket) async {
+          await Socket.connect(ip, port, timeout: Duration(milliseconds: 500)).then((socket) async {
             await InternetAddress(socket.address.address).reverse().then((value) {
               print(value.host);
               print(socket.address.address);

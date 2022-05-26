@@ -34,14 +34,14 @@ class _AddPcWidgetState extends State<AddPcWidget> {
     textControllerMac = TextEditingController();
     textControllerIp = TextEditingController();
     textControllerPort = TextEditingController();
-
-    if (widget.ip != FFLocalizations.of(context).getText('weifbuew')) {
-      textControllerIp.text = widget.ip;
-    }
   }
 
   @override
   Widget build(BuildContext context) {
+    if (widget.ip != FFLocalizations.of(context).getText('weifbuew')) {
+      textControllerIp.text = widget.ip;
+    }
+
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -298,7 +298,19 @@ class _AddPcWidgetState extends State<AddPcWidget> {
                       'port': textControllerPort.text,
                     };
 
-                    list.add(pc);
+                    bool exists = false;
+                    for (var i = 0; i < list.length; i++) {
+                      if (list[i]['mac'] == pc['mac']) {
+                        // mac already exists
+                        exists = true;
+                      }
+                    }
+
+                    if (!exists) {
+                      list.add(pc);
+
+                      // TODO: make an error message because of existing mac address
+                    }
 
                     String entriesNew = jsonEncode(list);
                     FFAppState().pcEntries = entriesNew;

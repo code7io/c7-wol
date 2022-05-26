@@ -73,33 +73,17 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'PC Name:',
       'de': 'PC Name:',
     },
-    'nxjvwl1h': {
-      'en': 'XX',
-      'de': 'XX',
-    },
     'd2ke4olt': {
-      'en': 'MAC Adress:',
+      'en': 'MAC Address:',
       'de': 'MAC Adresse:',
     },
-    'to4a3rps': {
-      'en': 'XX',
-      'de': 'XX',
-    },
     'g2lrrb9y': {
-      'en': 'IP Adress:',
+      'en': 'IP Address:',
       'de': 'IP Adresse:',
-    },
-    'xpd1801w': {
-      'en': 'XX',
-      'de': 'XX',
     },
     'ml43v9az': {
       'en': 'Port:',
       'de': 'Port:',
-    },
-    'mxwn5hs1': {
-      'en': 'XX',
-      'de': 'XX',
     },
     'go5528js': {
       'en': 'Delete',
@@ -120,6 +104,22 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     'qpnifeppolwdd': {
       'en': 'Online',
       'de': 'An',
+    },
+    'avu7ysio': {
+      'en': 'Sleep',
+      'de': 'Standby',
+    },
+    'uonfaasffsa': {
+      'en': 'Cancel',
+      'de': 'Abbrechen',
+    },
+    'afsadgfshghe': {
+      'en': 'Really Delete?',
+      'de': 'Wirklich Löschen?',
+    },
+    'owuehbnfiwbbubebbbsedf': {
+      'en': 'Do you want to really delete this PC?',
+      'de': 'Willst du wirklich diesen PC löschen?',
     },
   },
   // AddPc
