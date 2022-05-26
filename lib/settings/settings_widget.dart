@@ -86,6 +86,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                         min: 100,
                         max: 5000,
                         value: sliderValue ??= 100,
+                        label: sliderValue.toString(),
                         divisions: 49,
                         onChanged: (newValue) {
                           setState(() => sliderValue = newValue);
@@ -114,30 +115,26 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                     ],
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 40, 0, 0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Made in Mannheim with ❤️',
-                        style: FlutterFlowTheme.of(context).bodyText1,
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 5, 0, 0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'By code7.io',
-                        style: FlutterFlowTheme.of(context).bodyText1,
-                      ),
-                    ],
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Text(
+                          'Made in Mannheim with ❤️',
+                          textAlign: TextAlign.center,
+                          style: FlutterFlowTheme.of(context).bodyText1,
+                        ),
+                        Text(
+                          'By code7.io',
+                          textAlign: TextAlign.center,
+                          style: FlutterFlowTheme.of(context).bodyText1,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],

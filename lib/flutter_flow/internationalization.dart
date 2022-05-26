@@ -171,7 +171,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Add',
       'de': 'Hinzufügen',
     },
-    '4m8axf2t': {
+    '3nwwuj77': {
       'en': 'Add PC',
       'de': '',
     },
@@ -194,7 +194,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'en': 'Found Devices',
       'de': '',
     },
-    'o4ks304v': {
+    'p30zhz0a': {
       'en': 'Page Title',
       'de': '',
     },
@@ -205,31 +205,31 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // Settings
   {
-    'fhfrw5gi': {
+    'mot80xq6': {
       'en': 'Settings',
       'de': '',
     },
-    'zo9xzsyr': {
+    '3n5yh8wb': {
       'en': 'Ping duration during network scan',
       'de': '',
     },
-    'rvnt54uz': {
+    'dq6ulkwf': {
       'en': 'App Version',
       'de': '',
     },
-    '1vl2bkst': {
+    '6letzj15': {
       'en': '1.0.0',
       'de': '',
     },
-    'eio8o7k9': {
+    'jhpr6z46': {
       'en': 'Made in Mannheim with ❤️',
       'de': '',
     },
-    'w16998fz': {
+    '054vurrp': {
       'en': 'By code7.io',
       'de': '',
     },
-    'hw9g19er': {
+    'aglsbuv0': {
       'en': 'Home',
       'de': '',
     },
