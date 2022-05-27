@@ -65,7 +65,7 @@ class _SettingsWidgetState extends State<SettingsWidget> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                FFLocalizations.of(context).getText('wfmkmdckskld') + ': ' + pingTime.toString(),
+                FFLocalizations.of(context).getText('wfmkmdckskld') + ': ' + pingTime.toString() + 'ms',
                 style: FlutterFlowTheme.of(context).bodyText1,
               ),
               Row(

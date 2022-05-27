@@ -463,9 +463,7 @@ class _DetailWidgetState extends State<DetailWidget> {
                               final text = await showTextInputDialog(
                                 context: context,
                                 textFields: const [
-                                  DialogTextField(
-                                    hintText: '',
-                                  ),
+                                  DialogTextField(),
                                 ],
                                 title: FFLocalizations.of(context).getText(
                                   '7pqir15j' /* PC Name: */,
@@ -517,9 +515,7 @@ class _DetailWidgetState extends State<DetailWidget> {
                               final text = await showTextInputDialog(
                                 context: context,
                                 textFields: const [
-                                  DialogTextField(
-                                    hintText: '',
-                                  ),
+                                  DialogTextField(),
                                 ],
                                 title: FFLocalizations.of(context).getText(
                                   'g2lrrb9y' /* IP Address: */,
@@ -571,9 +567,7 @@ class _DetailWidgetState extends State<DetailWidget> {
                               final text = await showTextInputDialog(
                                 context: context,
                                 textFields: const [
-                                  DialogTextField(
-                                    hintText: '',
-                                  ),
+                                  DialogTextField(),
                                 ],
                                 title: FFLocalizations.of(context).getText(
                                   'ml43v9az' /* Port */,
