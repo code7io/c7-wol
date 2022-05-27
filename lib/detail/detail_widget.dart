@@ -42,7 +42,7 @@ class _DetailWidgetState extends State<DetailWidget> {
   }
 
   Future<void> statusTxt(context) async {
-    Ping ping = Ping(widget.pc.ip, count: 5);
+    Ping ping = Ping(widget.pc.ip, count: 1);
     ping.stream.listen((event) {
       if (event.summary.received == event.summary.transmitted) {
         setState(() => status = FFLocalizations.of(context).getText('qpnifeppolwdd'));
@@ -50,6 +50,8 @@ class _DetailWidgetState extends State<DetailWidget> {
         setState(() => status = FFLocalizations.of(context).getText('onqfweaponi'));
       }
     });
+    await Future.delayed(Duration(seconds: 5));
+    statusTxt(context);
   }
 
   void updateName(val) {

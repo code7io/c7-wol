@@ -15,6 +15,7 @@ class FFAppState {
     prefs = await SharedPreferences.getInstance();
     _hasEntry = prefs.getBool('ff_hasEntry') ?? _hasEntry;
     _pcEntries = prefs.getString('ff_pcEntries') ?? null;
+    _pingTime = prefs.getInt('ff_pingTime') ?? _pingTime;
   }
 
   SharedPreferences prefs;
@@ -31,5 +32,12 @@ class FFAppState {
   set pcEntries(String _value) {
     _pcEntries = _value;
     prefs.setString('ff_pcEntries', _value);
+  }
+
+  int _pingTime = 100;
+  int get pingTime => _pingTime;
+  set pingTime(int _value) {
+    _pingTime = _value;
+    prefs.setInt('ff_pingTime', _value);
   }
 }

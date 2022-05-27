@@ -196,4 +196,27 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'de': 'Kein Gerät gefunden. Manuell hinzufügen',
     },
   },
+  // Settings
+  {
+    'wedfnowfewef': {
+      'en': 'Settings',
+      'de': 'Einstellungen',
+    },
+    'wfmkmdckskld': {
+      'en': 'Ping duration during network scan',
+      'de': 'Ping Dauer beim Netzwerkscan',
+    },
+    'sdcmsölkdcvökmsd': {
+      'en': 'App version',
+      'de': 'App Version',
+    },
+    'adcmösdkckdsc': {
+      'en': 'Made in Mannheim with ❤️',
+      'de': 'Mit ❤️ in Mannheim gemacht',
+    },
+    'cmowic03i23ic0cc': {
+      'en': 'By code7.io',
+      'de': 'Von code7.io',
+    },
+  },
 ].reduce((a, b) => a..addAll(b));

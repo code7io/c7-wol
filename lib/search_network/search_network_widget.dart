@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:blinking_text/blinking_text.dart';
 import 'package:c7_wake_on_lan/add_pc/add_pc_widget.dart';
+import 'package:c7_wake_on_lan/flutter_flow/flutter_flow_icon_button.dart';
+import 'package:c7_wake_on_lan/home_page/home_page_widget.dart';
 import 'package:network_info_plus/network_info_plus.dart';
 
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -23,10 +25,16 @@ class _SearchNetworkWidgetState extends State<SearchNetworkWidget> {
   List<List<String>> foundIps = [];
   var subnet;
   bool isSearching = true;
+  int blinkDuration = 800;
+  String title = '0nfkq8eq';
+  int pingTime = 100;
 
   @override
   void initState() {
     super.initState();
+    setState(() {
+      pingTime = FFAppState().pingTime;
+    });
 
     scanNetwork();
   }
@@ -41,7 +49,7 @@ class _SearchNetworkWidgetState extends State<SearchNetworkWidget> {
           setState(() => percentTxt = (0.39 * i).toInt().toString() + '%');
 
           String ip = '$subnet.$i';
-          await Socket.connect(ip, port, timeout: Duration(milliseconds: 500)).then((socket) async {
+          await Socket.connect(ip, port, timeout: Duration(milliseconds: pingTime)).then((socket) async {
             await InternetAddress(socket.address.address).reverse().then((value) {
               foundIps.add([value.host, value.address]);
             }).catchError((error) {
@@ -59,6 +67,8 @@ class _SearchNetworkWidgetState extends State<SearchNetworkWidget> {
     }
 
     setState(() => isSearching = false);
+    setState(() => blinkDuration = 1);
+    setState(() => title = '3135dyww');
     print('Done');
   }
 
@@ -66,6 +76,47 @@ class _SearchNetworkWidgetState extends State<SearchNetworkWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
+      appBar: AppBar(
+        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+        automaticallyImplyLeading: false,
+        title: Row(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Visibility(
+              visible: isSearching,
+              child: BlinkText(FFLocalizations.of(context).getText(title), style: FlutterFlowTheme.of(context).subtitle1, duration: Duration(milliseconds: blinkDuration)),
+            ),
+            Visibility(
+              visible: !isSearching,
+              child: Text(FFLocalizations.of(context).getText(title), style: FlutterFlowTheme.of(context).subtitle1),
+            ),
+          ],
+        ),
+        actions: [
+          FlutterFlowIconButton(
+            borderColor: Colors.transparent,
+            borderRadius: 30,
+            borderWidth: 1,
+            buttonSize: 60,
+            icon: Icon(
+              Icons.close,
+              color: FlutterFlowTheme.of(context).primaryColor,
+              size: 30,
+            ),
+            onPressed: () async {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => HomePageWidget(),
+                ),
+              );
+            },
+          ),
+        ],
+        centerTitle: true,
+        elevation: 0,
+      ),
       backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
       body: SafeArea(
         child: GestureDetector(
@@ -104,28 +155,7 @@ class _SearchNetworkWidgetState extends State<SearchNetworkWidget> {
                           ),
                         ],
                       ),
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 50, 0, 0),
-                        child: BlinkText(
-                            FFLocalizations.of(context).getText(
-                              '0nfkq8eq' /* Searching Network */,
-                            ),
-                            style: FlutterFlowTheme.of(context).subtitle1,
-                            duration: Duration(milliseconds: 800)),
-                      ),
                     ],
-                  ),
-                ),
-              ),
-              Visibility(
-                visible: !isSearching,
-                child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 50, 0, 0),
-                  child: Text(
-                    FFLocalizations.of(context).getText(
-                      '3135dyww' /* Found Devices */,
-                    ),
-                    style: FlutterFlowTheme.of(context).subtitle1,
                   ),
                 ),
               ),
