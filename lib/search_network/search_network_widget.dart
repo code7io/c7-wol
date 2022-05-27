@@ -45,7 +45,9 @@ class _SearchNetworkWidgetState extends State<SearchNetworkWidget> {
           },
         ),
         title: Text(
-          'Page Title',
+          FFLocalizations.of(context).getText(
+            '2q8d26xr' /* Page Title */,
+          ),
           style: FlutterFlowTheme.of(context).title2.override(
                 fontFamily: 'Poppins',
                 color: FlutterFlowTheme.of(context).primaryText,

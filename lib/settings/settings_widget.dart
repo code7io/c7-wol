@@ -43,7 +43,9 @@ class _SettingsWidgetState extends State<SettingsWidget> {
           },
         ),
         title: Text(
-          'Settings',
+          FFLocalizations.of(context).getText(
+            'bkmd9gfj' /* Settings */,
+          ),
           style: FlutterFlowTheme.of(context).title2.override(
                 fontFamily: 'Poppins',
                 color: FlutterFlowTheme.of(context).primaryText,
@@ -65,29 +67,32 @@ class _SettingsWidgetState extends State<SettingsWidget> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Ping duration during network scan',
+                  FFLocalizations.of(context).getText(
+                    'lk00yele' /* Ping duration during network s... */,
+                  ),
                   style: FlutterFlowTheme.of(context).bodyText1,
                 ),
                 Row(
                   mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      valueOrDefault<String>(
-                        sliderValue.toString(),
-                        '100',
+                    Expanded(
+                      child: Container(
+                        width: double.infinity,
+                        child: Slider(
+                          activeColor:
+                              FlutterFlowTheme.of(context).primaryColor,
+                          inactiveColor: Color(0xFF9E9E9E),
+                          min: 100,
+                          max: 5100,
+                          value: sliderValue ??= 100,
+                          label: sliderValue.toString(),
+                          divisions: 100,
+                          onChanged: (newValue) {
+                            setState(() => sliderValue = newValue);
+                          },
+                        ),
                       ),
-                      style: FlutterFlowTheme.of(context).bodyText1,
-                    ),
-                    Slider(
-                      activeColor: FlutterFlowTheme.of(context).primaryColor,
-                      inactiveColor: Color(0xFF9E9E9E),
-                      min: 100,
-                      max: 5000,
-                      value: sliderValue ??= 100,
-                      divisions: 49,
-                      onChanged: (newValue) {
-                        setState(() => sliderValue = newValue);
-                      },
                     ),
                   ],
                 ),
@@ -98,13 +103,17 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'App Version',
+                        FFLocalizations.of(context).getText(
+                          'msbyqk9d' /* App Version */,
+                        ),
                         style: FlutterFlowTheme.of(context).bodyText1,
                       ),
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(20, 0, 0, 0),
                         child: Text(
-                          '1.0.0',
+                          FFLocalizations.of(context).getText(
+                            'o1zk14h5' /* 1.0.0 */,
+                          ),
                           style: FlutterFlowTheme.of(context).bodyText1,
                         ),
                       ),
@@ -120,18 +129,34 @@ class _SettingsWidgetState extends State<SettingsWidget> {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         Text(
-                          'Made in Mannheim with ❤️',
+                          FFLocalizations.of(context).getText(
+                            'vnbzfxd8' /* Made in Mannheim with ❤️ */,
+                          ),
                           textAlign: TextAlign.center,
                           style: FlutterFlowTheme.of(context).bodyText1,
                         ),
                         Text(
-                          'By code7.io',
+                          FFLocalizations.of(context).getText(
+                            'n6dyorg5' /* By code7.io */,
+                          ),
                           textAlign: TextAlign.center,
                           style: FlutterFlowTheme.of(context).bodyText1,
                         ),
                       ],
                     ),
                   ),
+                ),
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      FFLocalizations.of(context).getText(
+                        'banpy1rt' /* Hello World */,
+                      ),
+                      style: FlutterFlowTheme.of(context).bodyText1,
+                    ),
+                  ],
                 ),
               ],
             ),

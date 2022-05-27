@@ -60,7 +60,9 @@ class _AddPcWidgetState extends State<AddPcWidget> {
           },
         ),
         title: Text(
-          'Add PC',
+          FFLocalizations.of(context).getText(
+            'noqbak8t' /* Add PC */,
+          ),
           style: FlutterFlowTheme.of(context).title2.override(
                 fontFamily: 'Poppins',
                 color: FlutterFlowTheme.of(context).primaryText,
