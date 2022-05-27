@@ -43,7 +43,7 @@ class _SearchNetworkWidgetState extends State<SearchNetworkWidget> {
     await (NetworkInfo().getWifiIP()).then(
       (ip) async {
         final String subnet = ip.substring(0, ip.lastIndexOf('.'));
-        const port = 22;
+        const port = 80;
         for (var i = 0; i < 256; i++) {
           setState(() => percentInt = (0.0039 * i));
           setState(() => percentTxt = (0.39 * i).toInt().toString() + '%');
