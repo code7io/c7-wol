@@ -112,7 +112,18 @@ class _SearchNetworkWidgetState extends State<SearchNetworkWidget> {
                 ),
               );
             },
-          ),
+          ), /*
+          TextButton(
+            child: Text('Manually Add'),
+            onPressed: () async {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => HomePageWidget(),
+                ),
+              );
+            },
+          ),*/
         ],
         centerTitle: true,
         elevation: 0,
